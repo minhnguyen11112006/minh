@@ -1,25 +1,34 @@
 package vn.edu.ueh.minhnguyen.myapplication_buoi6;
 
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.recyclerview.widget.RecyclerView;
 
 public class CountryViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
-    private MyAdapter adapter;
-    public TextView tid;
-    public TextView tcountry;
-    public CountryViewHolder(View item, MyAdapter adapter){
+    private vn.edu.ueh.minhnguyen.myapplication_buoi6.MyAdapter adapter;
+    public TextView ttitle;
+    public TextView tcontent;
+    public TextView tviews;
+    public ImageView imgCover;
+
+    public CountryViewHolder(View item, vn.edu.ueh.minhnguyen.myapplication_buoi6.MyAdapter adapter){
         super(item);
         this.adapter=adapter;
-        this.tid=item.findViewById(R.id.tid);
-        this.tcountry=item.findViewById(R.id.tcountry);
+        this.ttitle=item.findViewById(R.id.ttitle);
+        this.tcontent=item.findViewById(R.id.tcontent);
+        this.tviews=item.findViewById(R.id.tviews);
+        this.imgCover=item.findViewById(R.id.imgCover);
         item.setOnClickListener(this);
     }
+
     @Override
     public void onClick(View v) {
-        String msg= tid.getText()+" | "+ tcountry.getText();
-        Toast.makeText(v.getContext(),msg,Toast.LENGTH_SHORT).show();;
+        // Báo cho MainActivity biết dòng nào vừa được click (MainActivity sẽ mở DetailActivity)
+        int position = getBindingAdapterPosition();
+        if (position != RecyclerView.NO_POSITION && adapter.getListener() != null) {
+            adapter.getListener().onArticleClick(position);
+        }
     }
 }

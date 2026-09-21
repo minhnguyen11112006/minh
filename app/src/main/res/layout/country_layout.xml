@@ -1,20 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- Một dòng của danh sách: bên trái là Title / Content / Views, bên phải là ảnh cover -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="horizontal">
+    android:orientation="horizontal"
+    android:padding="12dp"
+    android:background="?attr/selectableItemBackground">
 
-    <TextView
-        android:id="@+id/tid"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:text="ID" />
+        android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/tcountry"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_weight="3"
-        android:text="Country" />
+        <TextView
+            android:id="@+id/ttitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:maxLines="2"
+            android:ellipsize="end"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:text="Title" />
+
+        <TextView
+            android:id="@+id/tcontent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:maxLines="3"
+            android:ellipsize="end"
+            android:textSize="14sp"
+            android:text="Content" />
+
+        <TextView
+            android:id="@+id/tviews"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:textSize="13sp"
+            android:textStyle="italic"
+            android:text="Views: 0" />
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/imgCover"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginStart="12dp"
+        android:scaleType="centerCrop"
+        android:contentDescription="Ảnh cover" />
 </LinearLayout>

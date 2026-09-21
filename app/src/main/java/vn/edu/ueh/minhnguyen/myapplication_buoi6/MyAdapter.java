@@ -12,12 +12,25 @@ import java.util.List;
 
 public class MyAdapter extends RecyclerView.Adapter<CountryViewHolder> {
 
-    private List countryList;
-    LayoutInflater mInflater;
-    public MyAdapter(Context context, List list){
-        mInflater=LayoutInflater.from(context);
-        this.countryList=list;
+    /** Callback: báo cho Activity biết người dùng vừa click vào bài viết ở vị trí nào. */
+    public interface OnArticleClickListener {
+        void onArticleClick(int position);
     }
+
+    private List<Article> articleList;
+    private OnArticleClickListener listener;
+    LayoutInflater mInflater;
+
+    public MyAdapter(Context context, List<Article> list, OnArticleClickListener listener){
+        mInflater=LayoutInflater.from(context);
+        this.articleList=list;
+        this.listener=listener;
+    }
+
+    public OnArticleClickListener getListener() {
+        return listener;
+    }
+
     @NonNull
     @Override
     public CountryViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -28,13 +41,15 @@ public class MyAdapter extends RecyclerView.Adapter<CountryViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull CountryViewHolder holder, int position) {
-        String country=(String) countryList.get(position);
-        holder.tid.setText((position+1)+"");
-        holder.tcountry.setText(country);
+        Article article = articleList.get(position);
+        holder.ttitle.setText(article.getTitle());
+        holder.tcontent.setText(article.getContent());
+        holder.tviews.setText("Views: " + article.getViews());
+        holder.imgCover.setImageResource(article.getImgCover());
     }
 
     @Override
     public int getItemCount() {
-        return countryList.size();
+        return articleList.size();
     }
 }
